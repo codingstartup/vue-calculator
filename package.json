@@ -1,0 +1,56 @@
+{
+  "name": "vue-calculator",
+  "version": "2020.5.6-6.0.11",
+  "private": false,
+  "license": "MIT",
+  "homepage": "https://codingstartup.com",
+  "scripts": {
+    "build": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
+    "serve": "gulp serve -f ./build/gulpfile.js --cwd ./ --continue",
+    "task": "gulp -f ./build/gulpfile.js --cwd ./ --continue",
+    "tasks": "gulp --tasks-simple -f ./build/gulpfile.js --cwd ./ --continue"
+  },
+  "config": {
+    "srcDir": "src/",
+    "distDir": "dist/"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "del": "^4.1.1",
+    "glob": "^7.1.4",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^1.4.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1",
+    "gulp-inject-partials": "^1.0.5"
+  },
+  "tasks": {
+    "partials": {
+      "order": 999,
+      "src": [
+        "**/*.template.html"
+      ],
+      "pipe": [
+        {
+          "require": "gulp-inject-partials",
+          "args": [
+            {
+              "removeTags": true,
+              "quiet": true,
+              "ignoreError": true
+            }
+          ]
+        }
+      ],
+      "rename": {
+        "find": ".template",
+        "replace": ""
+      },
+      "cleanup": [
+        "**/*.partial.html",
+        "**/*.template.html"
+      ]
+    }
+  }
+}
